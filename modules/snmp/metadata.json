@@ -1,0 +1,56 @@
+{
+  "checksums": {
+    "manifests/server.pp": "d09bd28cc4df8cc1c790aacba2c588d6",
+    "files/snmptrapd.conf": "2c43e56f93f9ce4c0af739a52e3cf107",
+    "manifests/init.pp": "4c90b17dc89695f8b002a58217c00881",
+    "files/snmpd.sysconfig": "84a46702a31f5f4a23d7c1da10d9c64e",
+    "templates/snmptrapd.conf.erb": "d70e5a2a122f7d172c0479c4863b396c",
+    "spec/classes/snmp_init_spec.rb": "fae58e9fab8dc18d3f3fc4db439f7f6c",
+    "Rakefile": "bc80fe9d6aaaca0bbc13a8977c687cda",
+    "spec/defines/snmp_snmpv3_user_spec.rb": "da6ad4b8ae0ed5f983a112869296326a",
+    "README.md": "47875db805ff2f8915a9b9eea5540cd2",
+    "LICENSE": "1b862997c4bda7cca915fa111170fdc0",
+    "tests/init.pp": "e2367032734068f4f7fe8942178df8dd",
+    "templates/snmpd.conf.erb": "f2df00c712b513b698f5ab36a2210547",
+    "tests/trapd.pp": "365e95d9c4299ff062fedbc0f20a924c",
+    "manifests/params.pp": "780c970c96352164205f8578ae47fd70",
+    "DEVELOP.md": "cc63101e22f3f842e7de51059bdc59d6",
+    "tests/snmpv3_user.pp": "b33313045f33dc8c6dddde43e966cd1f",
+    "spec/spec_helper.rb": "3ea886dd135e120afa31e0aab12e85b0",
+    "files/snmptrapd.sysconfig": "84a46702a31f5f4a23d7c1da10d9c64e",
+    "files/snmptrapd.sysconfig-RedHat-6": "8dd0fab0c204f2514ac04349bcc72715",
+    "files/snmptrapd.sysconfig-RedHat-5": "8dd0fab0c204f2514ac04349bcc72715",
+    "spec/classes/snmp_server_spec.rb": "5b062ce29168a890525e9ceac5bee257",
+    "files/snmpd.sysconfig-Debian-12": "536542d8470261eb1971bd3bb35adf68",
+    "files/snmpd.conf": "3f1e1c69900ed2c63a3c16ae4675b462",
+    "manifests/snmpv3_user.pp": "f03a5a59a5aafdf75dda4f6dd1465cea",
+    "files/snmpd.sysconfig-RedHat-6": "ca59542e1f83c6c67226bbc8b87dd6f7",
+    "files/snmpd.sysconfig-RedHat-5": "9d713715062146775cb2b85cc6bdb526",
+    "Modulefile": "1f66a659f67ca7e1980ac3016bec0d70",
+    "manifests/trapd.pp": "366b1dfb6016f549c50194ccd8f9ae6a",
+    "spec/classes/snmp_trapd_spec.rb": "6952713d85be1d9307ed938e1caddf5d",
+    "files/snmp.conf": "84a46702a31f5f4a23d7c1da10d9c64e",
+    "tests/server.pp": "32781e90fd6634026b0d458804b86ae3"
+  },
+  "license": "Apache License, Version 2.0",
+  "version": "2.0.0",
+  "project_page": "https://github.com/razorsedge/puppet-snmp",
+  "source": "git://github.com/razorsedge/puppet-snmp.git",
+  "description": "This module manages the installation of the SNMP server, SNMP client, and SNMP trap server.  It also can create a SNMPv3 user with authentication and privacy passwords.",
+  "dependencies": [
+    {
+      "version_requirement": ">=2.3.0",
+      "name": "puppetlabs/stdlib"
+    },
+    {
+      "version_requirement": ">=1.0.0",
+      "name": "razorsedge/lsb"
+    }
+  ],
+  "summary": "Install and manage SNMP services.",
+  "types": [
+
+  ],
+  "author": "razorsedge",
+  "name": "razorsedge-snmp"
+}

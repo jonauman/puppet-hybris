@@ -1,0 +1,4 @@
+---
+fixtures:
+  symlinks:
+    account: "#{source_dir}"

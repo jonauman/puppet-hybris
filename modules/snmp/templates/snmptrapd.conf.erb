@@ -1,0 +1,7 @@
+###
+### File managed by Puppet
+###
+authCommunity   log,execute,net <%= @ro_community %>
+<% @trap_handlers.each do |handler| -%>
+<%= handler %>
+<% end %>

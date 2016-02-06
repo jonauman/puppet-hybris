@@ -1,0 +1,21 @@
+-------------------------------------------------
+Welcome to the host <%= fqdn %>
+
+OS: <%= operatingsystem %> <%= operatingsystemrelease %> <% if has_variable?("architecture") then %><%= architecture %><% end %>
+Kernel:	<%= kernelrelease %>
+-------------------------------------------------
+Puppet: <%= puppetversion %>
+Facter: <%= facterversion %>
+
+FQDN:   <%= fqdn %>
+IP:     <%= ipaddress %>
+UPTIME: <%= uptime %>
+
+<% if has_variable?("processor0") then -%>
+Processor: <%= processor0 %>
+<% end -%>
+<% if has_variable?("memorysize") then -%>
+Memory:    <%= memorysize %>
+<% end -%>
+-----------------------------------------------------------------------
+

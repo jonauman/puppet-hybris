@@ -1,0 +1,204 @@
+# place your custom properties into this file instead of modifying the project.properties
+# all properties in this file have higher priority and will overwrite the platform/project.properties settings.
+# Set this properties if you wish to use a database other then hypersonic
+###############################
+# Database
+###############################
+db.url=<%= @hash[@env][@context]['db.url'] %>
+db.driver=com.mysql.jdbc.Driver
+db.username=<%= @hash[@env][@context]['db.user'] %>
+db.password=<%= @hash[@env][@context]['db.password'] %>
+
+mysql.optional.tabledefs=CHARSET=utf8 COLLATE=utf8_bin
+mysql.tabletype=InnoDB
+
+# Database initialization
+system.unlocking.disabled=<%= @hash[@env][@context]['system.unlocking.disabled'] %>
+
+###############################
+# Cluster
+###############################
+<%# if cluster.id is set in hiera, override hostname regex %>
+clustermode=<%= @hash[@env][@context]['clustermode'] %>
+cluster.id=<% if @hash[@env][@context]['cluster.id'] %><%= @hash[@env][@context]['cluster.id'] %><% else %><%= @hostname.match(/[1-9][0-9]*/).to_s %><% end %>
+cluster.maxid=<%= @hash[@env][@context]['cluster.maxid'] %>
+cluster.broadcast.methods=tcp
+cluster.broadcast.method.tcp.serveraddress=<%= @ipaddress %>
+
+###############################
+# JAVA options
+###############################
+tomcat.generaloptions=-server -Xss256K -Xms<%= @memorysize_mb.to_i-2560 -%>m -Xmx<%= @memorysize_mb.to_i-2560 -%>m -XX:MaxPermSize=500M -XX:PermSize=500M -XX:+UseParallelOldGC -XX:+UseParallelGC -XX:ParallelGCThreads=<%= @processorcount -%> -Xloggc:${HYBRIS_LOG_DIR}/java_gc.log -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000 -ea -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dorg.tanukisoftware.wrapper.WrapperManager.mbean=true -Djava.endorsed.dirs="%CATALINA_HOME%/lib/endorsed" -Dcatalina.base=%CATALINA_BASE% -Dcatalina.home=%CATALINA_HOME% -Dfile.encoding=UTF-8 -Dlog4j.configuration=log4j_init_tomcat.properties -Djava.util.logging.config.file=jdk_logging.properties -Djava.io.tmpdir="${HYBRIS_TEMP_DIR}"<% if @hash[@env][@context]['newrelic'] %> -javaagent:/opt/hybris/bin/platform/tomcat-6/newrelic/newrelic.jar<% end %>
+
+###############################
+# Mail
+###############################
+# SMTP settings
+#mail.from=<%= @hash[@env][@context]['mail.from'] %>
+#mail.replyto=<%= @hash[@env][@context]['mail.replyto'] %>
+#mail.smtp.user=<%= @hash[@env][@context]['mail.smtp.user'] %>
+#mail.smtp.password=<%= @hash[@env][@context]['mail.smtp.password'] %>
+
+mail.smtp.server=<%= @hash[@env][@context]['mail.smtp.server'] %>
+mail.smtp.port=<%= @hash[@env][@context]['mail.smtp.port'] %>
+mail.smtp.useSSL=false
+
+# Set these properties if you wish to force all emails sent to a specific address
+mail.notifications.redirectTo=<%= @hash[@env][@context]['mail.notifications.redirectTo'] %>
+mail.notifications.redirectToDisplayName=<%= @hash[@env][@context]['mail.notifications.redirectToDisplayName'] %>
+
+# Default email for DoNotReply
+general.doNotReply.email=donotreply@example.com
+
+#Contactus emails
+
+###############################
+# Misc
+###############################
+# Default URLs set up
+hac.webroot=/hac
+storefrontContextRoot=
+
+# Type of the server environment
+server.environment.type=<%= @hash[@env][@context]['server.environment.type'] %>
+
+# Set to true to import the systest data during initialisation
+systest.data.create=false
+
+# Jalo Session Timeout
+default.session.timeout=3600
+
+# Turn lazy loading on
+servicelayer.prefetch=none
+
+# For dev only. Restart only needed to reload hMC configs.
+hmc.structure.db=<%= @hash[@env][@context]['hmc.structure.db'] %>
+
+# Set to true to see useful debug in source
+storefront.show.debug.info=false
+
+# Sets whether to  show live chat or not
+storefront.livechat.show=true
+
+#this was default set to true which cause com.mysql.MysqlDataTruncation Exception,
+#when someone try to save String (containing only numbers) value that pass limit of
+#number column definition in MySql server!
+classification.enable.string.to.number.conversion=false
+
+# increase import speed
+impex.import.workers=1
+catalog.sync.workers=1
+
+# check for new cronjobs every 5 minutes
+cronjob.trigger.interval=300
+
+# This defines the date to check if migrated users have logged in after migration
+migration.date.threshold=07-10-2013 00:00
+
+# Defines default customer groups
+user.group.default.uids=b2cgroup
+
+# Order Create/Cancel/Refund export csv directory
+file.export.folder.csv=orderTransactions/
+
+# Defines the number of search results per site 
+
+###############################
+# Chat
+###############################
+
+###############################
+# PostCodes
+###############################
+# Settings for the PostcodeAnywhere service
+pca.findaddresses.url=http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/Find/v1.10/xmla.ws
+pca.retrieveaddress.url=http://services.postcodeanywhere.co.uk/PostcodeAnywhere/Interactive/RetrieveById/v1.30/xmla.ws
+pca.key=
+pca.username=None
+
+# Channel Islands postcode prefixes 
+channel.island.postcodes=GY,JE
+
+###############################
+# Search
+###############################
+# Defines the number of search results per site 
+
+###############################
+# Navigation
+###############################
+# Defines codes for top level
+
+###############################
+# BV
+###############################
+# Set to true for BV in production
+bazaarvoice.production.mode=<%= @hash[@env][@context]['bazaarvoice.production.mode'] %>
+
+# Enable/disable BV Q&A on product page
+# set to true or false
+
+# Enable/disable BV Q&A on category page
+# set to true or false
+
+# Enable/disable BV R&R on product page 
+
+###############################
+# Nextopia
+###############################
+#Nextopia permisions 
+#nextopia.search.url=http://merchant.nextopiasoftware.com/return-results.php 
+nextopia.search.url=http://ecommerce-search.nextopiasoftware.com/return-results.php
+
+###############################
+# Payment
+###############################
+# Credit card expiry cronjob notice email configuration 
+cronjob.card.expiration.noticeBerofeDaysToExpire.default=14
+
+# Defines the paymentmode to use when authorising a credit card in my account
+# As well as the auth amount
+computop.cardType=creditcard
+computop.amount=0.99
+
+# List of supported card types from the CreditCardType enumeration 
+credit.card.supported.types=VISA,MasterCard,AMEX
+
+###############################
+#  URLs
+###############################
+# URLs for websites by HTTP
+
+# URLs for websites by HTTPS
+
+###############################
+# EV
+###############################
+# Email Vision account information
+
+###############################
+# ActiveMQ
+###############################
+# warehouse activemq config
+warehouseintegration.application-context=warehouseintegration-spring-<%= @hash[@env][@context]['server.environment.type'] %>.xml
+
+###############################
+# MaxMind
+###############################
+# maxmind IP restrictions
+
+# CSS
+ruby.sass.path=/usr/bin/sass
+
+##############################
+#SailThru configuration
+##############################
+special.delivery.mode.deliveryTime=1
+
+###############################
+# Environment specific configs
+###############################
+# extra configs
+<% @hash[@env][@context]['extra.config'].each do |val| -%>
+<%= val %>
+<% end -%>

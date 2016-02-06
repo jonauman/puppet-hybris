@@ -1,0 +1,30 @@
+#!/bin/sh -e 
+# Starts, stops, and restarts solr 
+SOLR_DIR="/opt/hybris/bin/ext-commerce/solrfacetsearch/resources/solr/server"
+SOLR_PID="/var/run/solr.pid"
+JAVA_OPTIONS="-server -Xmx1024m -jar -Dsolr.solr.home=. start.jar"
+LOG_FILE="/var/log/solr.log"
+JAVA="/usr/bin/java" 
+USER="hybris"
+
+case $1 in
+    start)
+        echo "Starting Solr"
+        cd $SOLR_DIR
+        sudo -u $USER $JAVA $JAVA_OPTIONS 2> $LOG_FILE &
+  pgrep -u $USER > $SOLR_PID
+        ;;
+    stop)
+        echo "Stopping Solr"
+  kill `cat $SOLR_PID`
+        ;;
+    restart)
+        $0 stop
+        sleep 1
+        $0 start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}" >&2
+        exit 1
+        ;;
+esac

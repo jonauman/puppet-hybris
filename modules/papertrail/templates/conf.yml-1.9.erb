@@ -1,0 +1,7 @@
+files: 
+<%- @logfile.each do |val| -%> 
+  - <%= val %>
+<%- end -%>
+destination:
+  host: <%= logserver %>
+  port: <%= logserverport %>
